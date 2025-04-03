@@ -1,0 +1,39 @@
+document.getElementById('generateColor').addEventListener('click', generateColor);
+document.getElementById('generateGradient').addEventListener('click', generateGradient);
+document.getElementById('generateNegative').addEventListener('click', generateNegative);
+
+function generateColor() {
+    const r = randomRGB();
+    const g = randomRGB();
+    const b = randomRGB();
+    const rgbColor = `rgb(${r}, ${g}, ${b})`;
+
+    document.getElementById('colorBox').style.backgroundColor = rgbColor;
+    document.getElementById('colorBox').textContent = rgbColor;
+}
+
+function generateGradient() {
+    const r1 = randomRGB(), g1 = randomRGB(), b1 = randomRGB();
+    const r2 = randomRGB(), g2 = randomRGB(), b2 = randomRGB();
+
+    const gradient = `linear-gradient(to right, rgb(${r1},${g1},${b1}), rgb(${r2},${g2},${b2}))`;
+    document.getElementById('colorBox').style.background = gradient;
+    document.getElementById('colorBox').textContent = "Gradiente Generado";
+}
+
+function generateNegative() {
+    const color = document.getElementById('colorBox').style.backgroundColor;
+    const rgbValues = color.match(/\d+/g);
+
+    if (rgbValues) {
+        const [r, g, b] = rgbValues.map(num => 255 - parseInt(num));
+        const negativeColor = `rgb(${r}, ${g}, ${b})`;
+
+        document.getElementById('colorBox').style.backgroundColor = negativeColor;
+        document.getElementById('colorBox').textContent = negativeColor;
+    }
+}
+
+function randomRGB() {
+    return Math.floor(Math.random() * 256);
+}
