@@ -1,39 +1,31 @@
-document.getElementById('generateColor').addEventListener('click', generateColor);
-document.getElementById('generateGradient').addEventListener('click', generateGradient);
-document.getElementById('generateNegative').addEventListener('click', generateNegative);
+const display = document.getElementById('display');
+const btnColor = document.getElementById('btnColor');
+const btnGradient = document.getElementById('btnGradient');
+const btnNegative = document.getElementById('btnNegative');
 
-function generateColor() {
-    const r = randomRGB();
-    const g = randomRGB();
-    const b = randomRGB();
-    const rgbColor = `rgb(${r}, ${g}, ${b})`;
+let currentColor = new Color(0,0,0);
 
-    document.getElementById('colorBox').style.backgroundColor = rgbColor;
-    document.getElementById('colorBox').textContent = rgbColor;
-}
+btnColor.addEventListener('click', () => {
+  currentColor = Color.random();
+  applyColor(currentColor.css);
+});
 
-function generateGradient() {
-    const r1 = randomRGB(), g1 = randomRGB(), b1 = randomRGB();
-    const r2 = randomRGB(), g2 = randomRGB(), b2 = randomRGB();
+btnGradient.addEventListener('click', () => {
+  const c1 = Color.random();
+  const c2 = Color.random();
+  const grad = new Gradient(c1, c2);
+  display.style.background = grad.css;
+  display.textContent = 'Gradiente';
+});
 
-    const gradient = `linear-gradient(to right, rgb(${r1},${g1},${b1}), rgb(${r2},${g2},${b2}))`;
-    document.getElementById('colorBox').style.background = gradient;
-    document.getElementById('colorBox').textContent = "Gradiente Generado";
-}
+btnNegative.addEventListener('click', () => {
+  const neg = currentColor.negative;
+  currentColor = neg;
+  applyColor(neg.css);
+});
 
-function generateNegative() {
-    const color = document.getElementById('colorBox').style.backgroundColor;
-    const rgbValues = color.match(/\d+/g);
-
-    if (rgbValues) {
-        const [r, g, b] = rgbValues.map(num => 255 - parseInt(num));
-        const negativeColor = `rgb(${r}, ${g}, ${b})`;
-
-        document.getElementById('colorBox').style.backgroundColor = negativeColor;
-        document.getElementById('colorBox').textContent = negativeColor;
-    }
-}
-
-function randomRGB() {
-    return Math.floor(Math.random() * 256);
+// Función auxiliar para aplicar color sólido
+function applyColor(cssValue) {
+  display.style.background = cssValue;
+  display.textContent = cssValue;
 }
