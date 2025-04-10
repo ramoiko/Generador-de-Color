@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Generador de Paleta OOP</title>
+  <link rel="generador ssc" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Generador de Paleta OOP</h1>
+    <div id="display" class="color-box">rgb(0, 0, 0)</div>
+    <div class="buttons">
+      <button id="btnColor">Color Aleatorio</button>
+      <button id="btnGradient">Gradiente Aleatorio</button>
+      <button id="btnNegative">Negativo</button>
+    </div>
+  </div>
+  <script src="generador"></script>
+</body>
+</html>
